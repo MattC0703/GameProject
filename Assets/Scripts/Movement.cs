@@ -37,7 +37,7 @@ public class Movement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // playerBody.AddForce(UnityEngine.Vector3.Normalize(UnityEngine.Vector3.right) * forceAmount, ForceMode.VelocityChange);
         if(Input.GetButtonDown("Left") || Input.GetButtonDown("Right")){
