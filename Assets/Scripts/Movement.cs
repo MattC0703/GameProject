@@ -96,9 +96,15 @@ public class Movement : MonoBehaviour
         if(!isRotating){
             RotationDeccel();
         }
-        if(!isAccelerating){
+        if(!isAccelerating && currentAccel > 0){
             Decelerate();
+            if(playerBody.linearVelocity.magnitude > currentAccel)
             playerBody.linearVelocity = playerBody.linearVelocity.normalized * currentAccel; 
+        }
+        if(!isAccelerating&& currentAccel < 0){
+            Decelerate();
+            if(playerBody.linearVelocity.magnitude*-1 < currentAccel)
+            playerBody.linearVelocity = playerBody.linearVelocity.normalized * currentAccel*-1; 
         }
 
         // transform.Rotate(new Vector3 (transform.rotation.x, transform.rotation.y+rotCurrentAccel, transform.rotation.z));
@@ -109,6 +115,7 @@ public class Movement : MonoBehaviour
         ClampMaxVelocity();
         // Vector3 currentLocation = transform.right;
         playerBody.AddForce(transform.right * currentAccel * Time.deltaTime, ForceMode.VelocityChange);
+        Debug.Log(playerBody.linearVelocity);
 
     }
 
