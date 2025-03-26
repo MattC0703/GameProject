@@ -1,4 +1,5 @@
 using System;
+using Unity.Cinemachine;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +10,12 @@ public class Movement : MonoBehaviour
     [SerializeField] public float forceAmount = 0;
     [SerializeField] public float rotateAmount = 0;
 
+    public CinemachineCamera vCam;
+    public CinemachineThirdPersonFollow thirdPersonFollow;
+    public float camDefaultDistance = 4f;
+    public float camAccel = 1.5f;
+    public float camDecel = 1.5f;
+
     public float rotMaxAccel = 200f;
     public float rotAccelSpeed = 100f;
     public float rotDeccelSpeed = 100f;
@@ -18,6 +25,7 @@ public class Movement : MonoBehaviour
 
     public float maxAccel = 700f;
     public float accelSpeed = 200f;
+    public float originalAccelSpeed = 20f;
     public float deccelSpeed = 100f;
     public float currentAccel = 0f;
 
@@ -33,7 +41,7 @@ public class Movement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-         playerBody = GetComponent<Rigidbody>();
+        playerBody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -67,8 +75,12 @@ public class Movement : MonoBehaviour
             isAccelerating = true;
             if(currentAccel < 0){
                 accelSpeed = deccelSpeed+200;
-            } else if (currentAccel > 0){
-                accelSpeed = 50;
+            } else if (currentAccel > 0 && currentAccel < 30){
+                accelSpeed = originalAccelSpeed;
+            } else if (currentAccel > 30 && currentAccel < 42){
+                accelSpeed = originalAccelSpeed/3;
+            } else if (currentAccel > 42){
+                accelSpeed = originalAccelSpeed/20;
             }
             Accelerate();
         }
@@ -78,9 +90,13 @@ public class Movement : MonoBehaviour
             if(currentAccel > 0){
                 accelSpeed = deccelSpeed+200;
                 isAccelerating = false;
-            } else if (currentAccel < 0){
-                accelSpeed = 50;
+            } else if (currentAccel < 0 && currentAccel > -30){
+                accelSpeed = originalAccelSpeed;
                 isAccelerating = true;
+            } else if (currentAccel < -30 && currentAccel > -42){
+                accelSpeed = originalAccelSpeed/3;
+            } else if (currentAccel < -42){
+                accelSpeed = originalAccelSpeed/20;
             }
             Accelerate();
         }
@@ -101,7 +117,7 @@ public class Movement : MonoBehaviour
             if(playerBody.linearVelocity.magnitude > currentAccel)
             playerBody.linearVelocity = playerBody.linearVelocity.normalized * currentAccel; 
         }
-        if(!isAccelerating&& currentAccel < 0){
+        if(!isAccelerating && currentAccel < 0){
             Decelerate();
             if(playerBody.linearVelocity.magnitude*-1 < currentAccel)
             playerBody.linearVelocity = playerBody.linearVelocity.normalized * currentAccel*-1; 
@@ -122,21 +138,37 @@ public class Movement : MonoBehaviour
     void RightRotationAccel(){
         rotCurrentAccel += rotAccelSpeed * Time.deltaTime;
         rotCurrentAccel = Mathf.Clamp(rotCurrentAccel, -40, rotMaxAccel);
+
+        thirdPersonFollow.CameraDistance += camAccel * Time.deltaTime;
+        thirdPersonFollow.CameraDistance = Mathf.Clamp(thirdPersonFollow.CameraDistance, 1f, 6f);
     }
     void LeftRotationAccel(){
         rotCurrentAccel -= rotAccelSpeed * Time.deltaTime;
         rotCurrentAccel = Mathf.Clamp(rotCurrentAccel, -400, rotMaxAccel);
+
+        thirdPersonFollow.CameraDistance -= camAccel * Time.deltaTime;
+        thirdPersonFollow.CameraDistance = Mathf.Clamp(thirdPersonFollow.CameraDistance, 1f, 6f);
     }
     void RotationDeccel(){
+            if(thirdPersonFollow.CameraDistance >= 4f){
+            thirdPersonFollow.CameraDistance -= camDecel * Time.deltaTime;
+            thirdPersonFollow.CameraDistance = Mathf.Clamp(thirdPersonFollow.CameraDistance, 4f, 6f); }
+            
+            if(thirdPersonFollow.CameraDistance <= 4f){
+            thirdPersonFollow.CameraDistance += camDecel * Time.deltaTime;
+            thirdPersonFollow.CameraDistance = Mathf.Clamp(thirdPersonFollow.CameraDistance, 1f, 4f); }
+
         switch (lastDirection)
     {
         case RotationDirection.Right:
             rotCurrentAccel -= rotDeccelSpeed * Time.deltaTime;
             rotCurrentAccel = Mathf.Clamp(rotCurrentAccel, 0, rotMaxAccel);
+            
             break;
         case RotationDirection.Left:
             rotCurrentAccel += rotDeccelSpeed * Time.deltaTime; 
             rotCurrentAccel = Mathf.Clamp(rotCurrentAccel, -rotMaxAccel, 0);
+
             break;
     }
     }

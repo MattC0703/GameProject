@@ -798,7 +798,7 @@ GameObject:
   - component: {fileID: 136809450}
   - component: {fileID: 136809449}
   m_Layer: 0
-  m_Name: topdownvalues
+  m_Name: altcamtopdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1261,8 +1261,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.121083, y: -0.000052965326, z: 0.000006460736, w: 0.9926424}
-  m_LocalPosition: {x: 1.7967744, y: 3.64, z: -8.536719}
+  m_LocalRotation: {x: 0.2787493, y: -0.00000008095263, z: 0.00000002349681, w: 0.9603639}
+  m_LocalPosition: {x: 1.7867744, y: 8.26, z: -9.543119}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2136,7 +2136,8 @@ MonoBehaviour:
   rotCurrentAccel: 0
   mod: 0
   maxAccel: 50
-  accelSpeed: 30
+  accelSpeed: 13
+  originalAccelSpeed: 13
   deccelSpeed: 50
   currentAccel: 0
   isRotating: 0
@@ -4642,10 +4643,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 0.15, y: 0, z: 0}
-  ShoulderOffset: {x: -28.8, y: 2.49, z: 4.59}
-  VerticalArmLength: 0.4
+  ShoulderOffset: {x: -36.2, y: 10.53, z: 4}
+  VerticalArmLength: -3.02
   CameraSide: 0.568
-  CameraDistance: 4.6
+  CameraDistance: 4
   AvoidObstacles:
     Enabled: 1
     CollisionFilter:
@@ -4706,8 +4707,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204292669}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.121083, y: -0.000052965326, z: 0.000006460736, w: 0.9926424}
-  m_LocalPosition: {x: 1.7967744, y: 3.64, z: -8.536719}
+  m_LocalRotation: {x: 0.2787493, y: -0.00000008095263, z: 0.00000002349681, w: 0.9603639}
+  m_LocalPosition: {x: 1.7867744, y: 8.26, z: -9.543119}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4741,7 +4742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Composition:
-    ScreenPosition: {x: 0, y: -0.11}
+    ScreenPosition: {x: 0, y: -0.27}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}
@@ -5082,6 +5083,94 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1323475396}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1333897478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1333897480}
+  - component: {fileID: 1333897479}
+  - component: {fileID: 1333897481}
+  m_Layer: 0
+  m_Name: altcamstandardfollow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1333897479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333897478}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f38bda98361e1de48a4ca2bd86ea3c17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Composition:
+    ScreenPosition: {x: 0, y: -0.11}
+    DeadZone:
+      Enabled: 0
+      Size: {x: 0.2, y: 0.2}
+    HardLimits:
+      Enabled: 0
+      Size: {x: 0.8, y: 0.8}
+      Offset: {x: 0, y: 0}
+  CenterOnActivate: 0
+  TargetOffset: {x: 90, y: 0, z: 0}
+  Damping: {x: 0.18, y: 0.15}
+  Lookahead:
+    Enabled: 0
+    Time: 0
+    Smoothing: 0
+    IgnoreY: 0
+--- !u!4 &1333897480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333897478}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 264.08325, y: -80.10099, z: -181.00629}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1333897481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333897478}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625c14eee3ad46c99df7c7c891ef668a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damping: {x: 0.15, y: 0, z: 0}
+  ShoulderOffset: {x: -28.8, y: 2.49, z: 4.59}
+  VerticalArmLength: 0.4
+  CameraSide: 0.568
+  CameraDistance: 4.6
+  AvoidObstacles:
+    Enabled: 1
+    CollisionFilter:
+      serializedVersion: 2
+      m_Bits: 55
+    IgnoreTag: 
+    CameraRadius: 0.2
+    DampingIntoCollision: 0
+    DampingFromCollision: 0.5
 --- !u!1 &1483052827
 GameObject:
   m_ObjectHideFlags: 0
@@ -6549,3 +6638,4 @@ SceneRoots:
   - {fileID: 858104618}
   - {fileID: 2027334513}
   - {fileID: 136809450}
+  - {fileID: 1333897480}
