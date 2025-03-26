@@ -797,6 +797,7 @@ GameObject:
   m_Component:
   - component: {fileID: 136809450}
   - component: {fileID: 136809449}
+  - component: {fileID: 136809451}
   m_Layer: 0
   m_Name: altcamtopdown
   m_TagString: Untagged
@@ -817,7 +818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Composition:
-    ScreenPosition: {x: 0, y: -0.11}
+    ScreenPosition: {x: 0, y: -0.27}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}
@@ -826,7 +827,7 @@ MonoBehaviour:
       Size: {x: 0.8, y: 0.8}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 0
-  TargetOffset: {x: 1.5, y: 8.07, z: 0}
+  TargetOffset: {x: 90, y: 0, z: 0}
   Damping: {x: 0.18, y: 0.15}
   Lookahead:
     Enabled: 0
@@ -848,6 +849,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &136809451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136809448}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625c14eee3ad46c99df7c7c891ef668a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damping: {x: 0.15, y: 0, z: 0}
+  ShoulderOffset: {x: -36.2, y: 10.53, z: 4}
+  VerticalArmLength: -3.02
+  CameraSide: 0.568
+  CameraDistance: 4
+  AvoidObstacles:
+    Enabled: 1
+    CollisionFilter:
+      serializedVersion: 2
+      m_Bits: 55
+    IgnoreTag: 
+    CameraRadius: 0.2
+    DampingIntoCollision: 0
+    DampingFromCollision: 0.5
 --- !u!1 &210405865
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,7 +1751,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 384139355}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07081409, y: -5.8421355e-16, z: 1.9451864e-16, w: 0.9974896}
+  m_LocalRotation: {x: 0.07081409, y: -0.000000025076488, z: 0.000000004950525, w: 0.9974896}
   m_LocalPosition: {x: 1.7867732, y: 3, z: -11.869919}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2065,7 +2092,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 520408748}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.2316017, y: 0.97206324, z: 1.8003}
   m_ConstrainProportionsScale: 0
@@ -2100,7 +2127,7 @@ Rigidbody:
   m_Mass: 4.04
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_CenterOfMass: {x: -0.01, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
@@ -2109,12 +2136,12 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
+  m_ImplicitCom: 0
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &520408754
 MonoBehaviour:
@@ -2130,16 +2157,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceAmount: 0
   rotateAmount: 0
+  vCam: {fileID: 1204292672}
+  thirdPersonFollow: {fileID: 1204292671}
+  camDefaultDistance: 4
+  camAccel: 8
+  camDecel: 8
   rotMaxAccel: 400
   rotAccelSpeed: 200
   rotDeccelSpeed: 600
   rotCurrentAccel: 0
   mod: 0
-  maxAccel: 50
-  accelSpeed: 13
-  originalAccelSpeed: 13
+  maxAccel: 30
+  accelSpeed: 22
+  originalAccelSpeed: 22
   deccelSpeed: 50
   currentAccel: 0
+  initialPullStrengthx: 0.1
+  initialPullStrengthz: 0.1
   isRotating: 0
   isAccelerating: 0
 --- !u!1 &531747471

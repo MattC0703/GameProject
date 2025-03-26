@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using Unity.Cinemachine;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
@@ -29,6 +30,9 @@ public class Movement : MonoBehaviour
     public float deccelSpeed = 100f;
     public float currentAccel = 0f;
 
+    public float initialPullStrengthx = Mathf.Clamp(.1f, .1f, 100f);
+    public float initialPullStrengthz = Mathf.Clamp(.1f, .1f, 100f);
+
     enum RotationDirection { None, Left, Right }
     RotationDirection lastDirection = RotationDirection.None;
 
@@ -47,6 +51,8 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        fixCarOrientation();
+
         // playerBody.AddForce(UnityEngine.Vector3.Normalize(UnityEngine.Vector3.right) * forceAmount, ForceMode.VelocityChange);
         if(Input.GetButtonDown("Left") || Input.GetButtonDown("Right")){
             isRotating = true;
@@ -75,11 +81,11 @@ public class Movement : MonoBehaviour
             isAccelerating = true;
             if(currentAccel < 0){
                 accelSpeed = deccelSpeed+200;
-            } else if (currentAccel > 0 && currentAccel < 30){
+            } else if (currentAccel > 0 && currentAccel < maxAccel/2){
                 accelSpeed = originalAccelSpeed;
-            } else if (currentAccel > 30 && currentAccel < 42){
+            } else if (currentAccel >= maxAccel/2  && currentAccel < maxAccel/1.35){
                 accelSpeed = originalAccelSpeed/3;
-            } else if (currentAccel > 42){
+            } else if (currentAccel >= maxAccel/1.35 ){
                 accelSpeed = originalAccelSpeed/20;
             }
             Accelerate();
@@ -90,12 +96,12 @@ public class Movement : MonoBehaviour
             if(currentAccel > 0){
                 accelSpeed = deccelSpeed+200;
                 isAccelerating = false;
-            } else if (currentAccel < 0 && currentAccel > -30){
+            } else if (currentAccel < 0 && currentAccel > maxAccel/2*-1){
                 accelSpeed = originalAccelSpeed;
                 isAccelerating = true;
-            } else if (currentAccel < -30 && currentAccel > -42){
+            } else if (currentAccel < maxAccel/2*-1 && currentAccel > maxAccel/1.35*-1){
                 accelSpeed = originalAccelSpeed/3;
-            } else if (currentAccel < -42){
+            } else if (currentAccel <= maxAccel/1.35*-1){
                 accelSpeed = originalAccelSpeed/20;
             }
             Accelerate();
@@ -131,7 +137,7 @@ public class Movement : MonoBehaviour
         ClampMaxVelocity();
         // Vector3 currentLocation = transform.right;
         playerBody.AddForce(transform.right * currentAccel * Time.deltaTime, ForceMode.VelocityChange);
-        Debug.Log(playerBody.linearVelocity);
+        // Debug.Log(playerBody.linearVelocity);
 
     }
 
@@ -163,7 +169,7 @@ public class Movement : MonoBehaviour
         case RotationDirection.Right:
             rotCurrentAccel -= rotDeccelSpeed * Time.deltaTime;
             rotCurrentAccel = Mathf.Clamp(rotCurrentAccel, 0, rotMaxAccel);
-            
+
             break;
         case RotationDirection.Left:
             rotCurrentAccel += rotDeccelSpeed * Time.deltaTime; 
@@ -203,6 +209,73 @@ public class Movement : MonoBehaviour
         Vector3 velocity = playerBody.linearVelocity;
         if(velocity.magnitude > maxAccel){
             playerBody.linearVelocity = velocity.normalized * maxAccel;
+        }
+    }
+
+
+    void fixCarOrientation(){
+        Vector3 carRotation = transform.eulerAngles;
+        Debug.Log(carRotation);
+        Debug.Log(initialPullStrengthx);
+
+        
+
+        if(carRotation.x > 0 && carRotation.x < 180){
+            carRotation.x = Mathf.Clamp(transform.eulerAngles.x, 0, 359.5f);
+            carRotation.x -= initialPullStrengthx;
+            transform.eulerAngles = carRotation;
+
+            if(initialPullStrengthx < 50)
+            initialPullStrengthx *= 1.1f;
+        } 
+        else if (carRotation.x > 180 && carRotation.x < 359.5f){
+            carRotation.x = Mathf.Clamp(carRotation.x, 0, 359.5f);
+            carRotation.x += initialPullStrengthx;
+            transform.eulerAngles = carRotation;
+
+            if(initialPullStrengthx < 50)
+            initialPullStrengthx *= 1.1f;
+        } 
+        if (carRotation.x >= 359.5f){
+            carRotation.x = Mathf.Clamp(carRotation.x, 0, .5f);
+            carRotation.x = 0;
+            transform.eulerAngles = carRotation;
+            initialPullStrengthx = .1f;
+        }
+        if (carRotation.x <= .5f){
+            carRotation.x = Mathf.Clamp(carRotation.x, 0, .5f);
+            carRotation.x = 0;
+            transform.eulerAngles = carRotation;
+            initialPullStrengthx = .1f;
+        }
+
+        if(carRotation.z > 0 && carRotation.z < 180){
+            carRotation.z = Mathf.Clamp(transform.eulerAngles.z, 0, 359.5f);
+            carRotation.z -= initialPullStrengthz;
+            transform.eulerAngles = carRotation;
+
+            if(initialPullStrengthz < 50)
+            initialPullStrengthz *= 1.1f;
+        } 
+        else if (carRotation.z > 180 && carRotation.z < 359.5f){
+            carRotation.z = Mathf.Clamp(carRotation.z, 0, 359.5f);
+            carRotation.z += initialPullStrengthz;
+            transform.eulerAngles = carRotation;
+
+            if(initialPullStrengthz < 50)
+            initialPullStrengthz *= 1.1f;
+        } 
+        if (carRotation.z >= 395.5f){
+            carRotation.z = Mathf.Clamp(carRotation.z, 0, .5f);
+            carRotation.z = 0;
+            transform.eulerAngles = carRotation;
+            initialPullStrengthz = .1f;
+        } 
+        if (carRotation.z <= .5f){
+            carRotation.z = Mathf.Clamp(carRotation.x, 0, .5f);
+            carRotation.z = 0;
+            transform.eulerAngles = carRotation;
+            initialPullStrengthz = .1f;
         }
     }
 }
