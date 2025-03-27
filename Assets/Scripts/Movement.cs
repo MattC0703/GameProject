@@ -33,6 +33,8 @@ public class Movement : MonoBehaviour
     public float initialPullStrengthx = Mathf.Clamp(.1f, .1f, 100f);
     public float initialPullStrengthz = Mathf.Clamp(.1f, .1f, 100f);
 
+    public float turningDampValue = 5f;
+
     enum RotationDirection { None, Left, Right }
     RotationDirection lastDirection = RotationDirection.None;
 
@@ -117,6 +119,7 @@ public class Movement : MonoBehaviour
 
         if(!isRotating){
             RotationDeccel();
+            playerBody.angularVelocity = Vector3.Lerp(playerBody.angularVelocity, Vector3.zero, turningDampValue * Time.deltaTime);
         }
         if(!isAccelerating && currentAccel > 0){
             Decelerate();
@@ -138,6 +141,7 @@ public class Movement : MonoBehaviour
         // Vector3 currentLocation = transform.right;
         playerBody.AddForce(transform.right * currentAccel * Time.deltaTime, ForceMode.VelocityChange);
         // Debug.Log(playerBody.linearVelocity);
+        SmoothTurn();
 
     }
 
@@ -277,5 +281,9 @@ public class Movement : MonoBehaviour
             transform.eulerAngles = carRotation;
             initialPullStrengthz = .1f;
         }
+    }
+
+    void SmoothTurn(){
+        Vector3.Lerp(playerBody.linearVelocity, transform.forward * currentAccel, 1f);
     }
 }
