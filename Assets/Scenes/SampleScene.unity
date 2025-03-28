@@ -2177,9 +2177,9 @@ MonoBehaviour:
   camDefaultDistance: 4
   camAccel: 8
   camDecel: 8
-  rotMaxAccel: 400
-  rotAccelSpeed: 200
-  rotDeccelSpeed: 600
+  rotMaxAccel: 100
+  rotAccelSpeed: 150
+  rotDeccelSpeed: 300
   rotCurrentAccel: 0
   mod: 0
   maxAccel: 30
@@ -2190,6 +2190,7 @@ MonoBehaviour:
   initialPullStrengthx: 0.1
   initialPullStrengthz: 0.1
   turningDampValue: 5
+  isDrifting: 0
   isRotating: 0
   isAccelerating: 0
 --- !u!1 &531747471
