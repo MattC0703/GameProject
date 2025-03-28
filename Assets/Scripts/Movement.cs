@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using Unity.Cinemachine;
 using UnityEditor.ShaderGraph.Internal;
@@ -35,6 +36,8 @@ public class Movement : MonoBehaviour
 
     public float turningDampValue = 5f;
 
+    public bool isDrifting = false;
+
     enum RotationDirection { None, Left, Right }
     RotationDirection lastDirection = RotationDirection.None;
 
@@ -45,9 +48,11 @@ public class Movement : MonoBehaviour
     [SerializeField] private bool isRotating = false;
     [SerializeField] private bool isAccelerating = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private float originalRotAccel;
     void Start()
     {
         playerBody = GetComponent<Rigidbody>();
+        originalRotAccel = rotMaxAccel;
     }
 
     // Update is called once per frame
@@ -119,7 +124,9 @@ public class Movement : MonoBehaviour
 
         if(!isRotating){
             RotationDeccel();
-            playerBody.angularVelocity = Vector3.Lerp(playerBody.angularVelocity, Vector3.zero, turningDampValue * Time.deltaTime);
+            
+            playerBody.angularVelocity = Vector3.Lerp(playerBody.angularVelocity, Vector3.zero, turningDampValue * Time.deltaTime); 
+            //if player isn't turning, naturally straighten car
         }
         if(!isAccelerating && currentAccel > 0){
             Decelerate();
@@ -131,6 +138,9 @@ public class Movement : MonoBehaviour
             if(playerBody.linearVelocity.magnitude*-1 < currentAccel)
             playerBody.linearVelocity = playerBody.linearVelocity.normalized * currentAccel*-1; 
         }
+
+
+
 
         // transform.Rotate(new Vector3 (transform.rotation.x, transform.rotation.y+rotCurrentAccel, transform.rotation.z));
         UnityEngine.Vector3 currentRotation = transform.eulerAngles;
@@ -145,28 +155,44 @@ public class Movement : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space)){
+            isDrifting = true;
+        }
+        if(Input.GetKeyUp(KeyCode.Space)){
+            isDrifting = false;
+        }
+        if(Input.GetKey(KeyCode.Space)){
+            isDrifting = true;
+        }
+        Drift();
+    }
+
+    private float camFarAllow = 6f;
+    private float camShortAllow = 1f;
     void RightRotationAccel(){
         rotCurrentAccel += rotAccelSpeed * Time.deltaTime;
         rotCurrentAccel = Mathf.Clamp(rotCurrentAccel, -40, rotMaxAccel);
 
         thirdPersonFollow.CameraDistance += camAccel * Time.deltaTime;
-        thirdPersonFollow.CameraDistance = Mathf.Clamp(thirdPersonFollow.CameraDistance, 1f, 6f);
+        thirdPersonFollow.CameraDistance = Mathf.Clamp(thirdPersonFollow.CameraDistance, camShortAllow, camFarAllow);
     }
     void LeftRotationAccel(){
         rotCurrentAccel -= rotAccelSpeed * Time.deltaTime;
-        rotCurrentAccel = Mathf.Clamp(rotCurrentAccel, -400, rotMaxAccel);
+        rotCurrentAccel = Mathf.Clamp(rotCurrentAccel, -rotMaxAccel, rotMaxAccel);
 
         thirdPersonFollow.CameraDistance -= camAccel * Time.deltaTime;
-        thirdPersonFollow.CameraDistance = Mathf.Clamp(thirdPersonFollow.CameraDistance, 1f, 6f);
+        thirdPersonFollow.CameraDistance = Mathf.Clamp(thirdPersonFollow.CameraDistance, camShortAllow, camFarAllow);
     }
     void RotationDeccel(){
             if(thirdPersonFollow.CameraDistance >= 4f){
             thirdPersonFollow.CameraDistance -= camDecel * Time.deltaTime;
-            thirdPersonFollow.CameraDistance = Mathf.Clamp(thirdPersonFollow.CameraDistance, 4f, 6f); }
+            thirdPersonFollow.CameraDistance = Mathf.Clamp(thirdPersonFollow.CameraDistance, 4f, camFarAllow); }
             
             if(thirdPersonFollow.CameraDistance <= 4f){
             thirdPersonFollow.CameraDistance += camDecel * Time.deltaTime;
-            thirdPersonFollow.CameraDistance = Mathf.Clamp(thirdPersonFollow.CameraDistance, 1f, 4f); }
+            thirdPersonFollow.CameraDistance = Mathf.Clamp(thirdPersonFollow.CameraDistance, camShortAllow, 4f); }
 
         switch (lastDirection)
     {
@@ -181,6 +207,22 @@ public class Movement : MonoBehaviour
 
             break;
     }
+    }
+
+
+    void Drift(){
+        if(isDrifting){
+            camFarAllow = 8f;
+            camShortAllow = -1f;
+
+            rotMaxAccel *= 2;
+        } 
+        if(!isDrifting){
+            camFarAllow = 6f;
+            camShortAllow = 1f;
+
+            rotMaxAccel = originalRotAccel;
+        }
     }
     void Accelerate(){
         switch(momentumDirection)
@@ -286,4 +328,6 @@ public class Movement : MonoBehaviour
     void SmoothTurn(){
         Vector3.Lerp(playerBody.linearVelocity, transform.forward * currentAccel, 1f);
     }
+
+
 }
