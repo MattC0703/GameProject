@@ -1262,7 +1262,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 88.7451
+  field of view: 79
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1288,8 +1288,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2787493, y: -0.00000008095263, z: 0.00000002349681, w: 0.9603639}
-  m_LocalPosition: {x: 1.7867744, y: 8.26, z: -9.543119}
+  m_LocalRotation: {x: 0.2518561, y: -0.00000008157647, z: 0.000000021229882, w: 0.96776474}
+  m_LocalPosition: {x: 1.7867744, y: 7.1600003, z: -9.543119}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2191,6 +2191,7 @@ MonoBehaviour:
   initialPullStrengthz: 0.1
   turningDampValue: 5
   isDrifting: 0
+  camLerpSpeed: 5.5
   isRotating: 0
   isAccelerating: 0
 --- !u!1 &531747471
@@ -7039,7 +7040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 0.15, y: 0, z: 0}
-  ShoulderOffset: {x: -36.2, y: 10.53, z: 4}
+  ShoulderOffset: {x: -36.2, y: 9.43, z: 4}
   VerticalArmLength: -3.02
   CameraSide: 0.568
   CameraDistance: 4
@@ -7076,7 +7077,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 88.7451
+    FieldOfView: 79
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -7103,8 +7104,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204292669}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2787493, y: -0.00000008095263, z: 0.00000002349681, w: 0.9603639}
-  m_LocalPosition: {x: 1.7867744, y: 8.26, z: -9.543119}
+  m_LocalRotation: {x: 0.2518561, y: -0.00000008157647, z: 0.000000021229882, w: 0.96776474}
+  m_LocalPosition: {x: 1.7867744, y: 7.1600003, z: -9.543119}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7138,7 +7139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Composition:
-    ScreenPosition: {x: 0, y: -0.27}
+    ScreenPosition: {x: 0, y: -0.28686345}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}

@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -37,6 +39,8 @@ public class Movement : MonoBehaviour
     public float turningDampValue = 5f;
 
     public bool isDrifting = false;
+
+    public float camLerpSpeed = 5f;
 
     enum RotationDirection { None, Left, Right }
     RotationDirection lastDirection = RotationDirection.None;
@@ -171,6 +175,8 @@ public class Movement : MonoBehaviour
 
     private float camFarAllow = 6f;
     private float camShortAllow = 1f;
+    private float originalCamFarAllow = 6f;
+    private float originalCamShortAllow = 1f;
     void RightRotationAccel(){
         rotCurrentAccel += rotAccelSpeed * Time.deltaTime;
         rotCurrentAccel = Mathf.Clamp(rotCurrentAccel, -40, rotMaxAccel);
@@ -209,21 +215,59 @@ public class Movement : MonoBehaviour
     }
     }
 
-
+    private Coroutine camLerpCoroutine;  // Store the reference to the coroutine
     void Drift(){
         if(isDrifting){
             camFarAllow = 8f;
             camShortAllow = -1f;
 
             rotMaxAccel *= 2;
+
+            if(camLerpCoroutine != null){
+                StopCoroutine(camLerpCoroutine);
+                camLerpCoroutine = null;
+            }
         } 
         if(!isDrifting){
-            camFarAllow = 6f;
-            camShortAllow = 1f;
+            // camFarAllow = 6f;
+            // camShortAllow = 1f;
+            // camFarAllow = Mathf.Lerp(camFarAllow, originalCamFarAllow, camLerpSpeed * Time.deltaTime);
+            // camShortAllow = Mathf.Lerp(camShortAllow, originalCamFarAllow, camLerpSpeed * Time.deltaTime);
+
+            if(camLerpCoroutine == null){
+                camLerpCoroutine = StartCoroutine(SmoothCameraTransition());
+            }
 
             rotMaxAccel = originalRotAccel;
         }
     }
+
+    IEnumerator SmoothCameraTransition(){
+    float lerpProgress = 0f;
+
+
+    float currentCamFar = camFarAllow;
+    float currentCamShort = camShortAllow;
+
+    // Lerp over time
+    while (lerpProgress < 1f) {
+        lerpProgress += Time.deltaTime * camLerpSpeed;
+
+        // Lerp between the current and original values
+        camFarAllow = Mathf.Lerp(currentCamFar, originalCamFarAllow, lerpProgress);
+        camShortAllow = Mathf.Lerp(currentCamShort, originalCamShortAllow, lerpProgress);
+
+        yield return null;  // Wait for the next frame
+    }
+
+    // Once Lerp is done, hard set the final values
+    camFarAllow = originalCamFarAllow;
+    camShortAllow = originalCamShortAllow;
+
+    // Reset coroutine reference
+    camLerpCoroutine = null;
+}
+
     void Accelerate(){
         switch(momentumDirection)
     {
