@@ -7149,7 +7149,7 @@ MonoBehaviour:
       Offset: {x: 0, y: 0}
   CenterOnActivate: 0
   TargetOffset: {x: 90, y: 0, z: 0}
-  Damping: {x: 0.18, y: 0.15}
+  Damping: {x: 0.35, y: 0.15}
   Lookahead:
     Enabled: 0
     Time: 0
