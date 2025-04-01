@@ -42,6 +42,12 @@ public class Movement : MonoBehaviour
 
     public float camLerpSpeed = 5f;
 
+    public ParticleSystem staticDriftDustLeft;
+    public ParticleSystem staticDriftDustRight;
+    public ParticleSystem dynamicDriftDustLeft;
+    public ParticleSystem dynamicDriftDustRight;
+    [SerializeField] private bool hasParticles = false;
+
     enum RotationDirection { None, Left, Right }
     RotationDirection lastDirection = RotationDirection.None;
 
@@ -57,6 +63,10 @@ public class Movement : MonoBehaviour
     {
         playerBody = GetComponent<Rigidbody>();
         originalRotAccel = rotMaxAccel;
+
+        ParticleSystem ps = GetComponent<ParticleSystem>();
+        var main = ps.main;
+        main.simulationSpace = ParticleSystemSimulationSpace.Local;
     }
 
     // Update is called once per frame
@@ -171,6 +181,19 @@ public class Movement : MonoBehaviour
             isDrifting = true;
         }
         Drift();
+
+        if(staticDriftDustLeft != null && staticDriftDustRight != null && dynamicDriftDustLeft != null && dynamicDriftDustRight != null && hasParticles == true){
+            if(currentAccel >= 23 && rotCurrentAccel >= 90 || rotCurrentAccel > 100 || currentAccel >= 23 && rotCurrentAccel <= -90 || rotCurrentAccel < -100){
+                if(!staticDriftDustLeft.isPlaying){
+                    staticDriftDustLeft.Play(); staticDriftDustRight.Play(); dynamicDriftDustLeft.Play(); dynamicDriftDustRight.Play();
+                }
+            }
+            else {
+                if(staticDriftDustLeft.isPlaying){
+                    staticDriftDustLeft.Stop(); staticDriftDustRight.Stop(); dynamicDriftDustLeft.Stop(); dynamicDriftDustRight.Stop();
+                }
+            }
+        }
     }
 
     private float camFarAllow = 6f;
