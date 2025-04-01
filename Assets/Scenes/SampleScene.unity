@@ -31592,6 +31592,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 365883944}
+    - target: {fileID: 3780728379684615117, guid: 00f9e5debee09d74699cefa67e67be03, type: 3}
+      propertyPath: m_CenterOfMass.z
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5342820664500748626, guid: 00f9e5debee09d74699cefa67e67be03, type: 3}
       propertyPath: m_Name
       value: Car
@@ -31671,6 +31675,10 @@ PrefabInstance:
     - target: {fileID: 8321374265631818510, guid: 00f9e5debee09d74699cefa67e67be03, type: 3}
       propertyPath: hasParticles
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8321374265631818510, guid: 00f9e5debee09d74699cefa67e67be03, type: 3}
+      propertyPath: turningDampValue
+      value: 8.25
       objectReference: {fileID: 0}
     - target: {fileID: 8321374265631818510, guid: 00f9e5debee09d74699cefa67e67be03, type: 3}
       propertyPath: thirdPersonFollow
