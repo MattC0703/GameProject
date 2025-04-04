@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Internal;
+// using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -72,7 +72,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        fixCarOrientation();
+        // fixCarOrientation();
 
         // playerBody.AddForce(UnityEngine.Vector3.Normalize(UnityEngine.Vector3.right) * forceAmount, ForceMode.VelocityChange);
         if(Input.GetButtonDown("Left") || Input.GetButtonDown("Right")){
@@ -326,71 +326,71 @@ public class Movement : MonoBehaviour
     }
 
 
-    void fixCarOrientation(){
-        Vector3 carRotation = transform.eulerAngles;
-        Debug.Log(carRotation);
-        Debug.Log(initialPullStrengthx);
+    // void fixCarOrientation(){
+    //     Vector3 carRotation = transform.eulerAngles;
+    //     Debug.Log(carRotation);
+    //     Debug.Log(initialPullStrengthx);
 
         
 
-        if(carRotation.x > 0 && carRotation.x < 180){
-            carRotation.x = Mathf.Clamp(transform.eulerAngles.x, 0, 359.5f);
-            carRotation.x -= initialPullStrengthx;
-            transform.eulerAngles = carRotation;
+    //     if(carRotation.x > 0 && carRotation.x < 180){
+    //         carRotation.x = Mathf.Clamp(transform.eulerAngles.x, 0, 359.5f);
+    //         carRotation.x -= initialPullStrengthx;
+    //         transform.eulerAngles = carRotation;
 
-            if(initialPullStrengthx < 50)
-            initialPullStrengthx *= 1.1f;
-        } 
-        else if (carRotation.x > 180 && carRotation.x < 359.5f){
-            carRotation.x = Mathf.Clamp(carRotation.x, 0, 359.5f);
-            carRotation.x += initialPullStrengthx;
-            transform.eulerAngles = carRotation;
+    //         if(initialPullStrengthx < 50)
+    //         initialPullStrengthx *= 1.1f;
+    //     } 
+    //     else if (carRotation.x > 180 && carRotation.x < 359.5f){
+    //         carRotation.x = Mathf.Clamp(carRotation.x, 0, 359.5f);
+    //         carRotation.x += initialPullStrengthx;
+    //         transform.eulerAngles = carRotation;
 
-            if(initialPullStrengthx < 50)
-            initialPullStrengthx *= 1.1f;
-        } 
-        if (carRotation.x >= 359.5f){
-            carRotation.x = Mathf.Clamp(carRotation.x, 0, .5f);
-            carRotation.x = 0;
-            transform.eulerAngles = carRotation;
-            initialPullStrengthx = .1f;
-        }
-        if (carRotation.x <= .5f){
-            carRotation.x = Mathf.Clamp(carRotation.x, 0, .5f);
-            carRotation.x = 0;
-            transform.eulerAngles = carRotation;
-            initialPullStrengthx = .1f;
-        }
+    //         if(initialPullStrengthx < 50)
+    //         initialPullStrengthx *= 1.1f;
+    //     } 
+    //     if (carRotation.x >= 359.5f){
+    //         carRotation.x = Mathf.Clamp(carRotation.x, 0, .5f);
+    //         carRotation.x = 0;
+    //         transform.eulerAngles = carRotation;
+    //         initialPullStrengthx = .1f;
+    //     }
+    //     if (carRotation.x <= .5f){
+    //         carRotation.x = Mathf.Clamp(carRotation.x, 0, .5f);
+    //         carRotation.x = 0;
+    //         transform.eulerAngles = carRotation;
+    //         initialPullStrengthx = .1f;
+    //     }
 
-        if(carRotation.z > 0 && carRotation.z < 180){
-            carRotation.z = Mathf.Clamp(transform.eulerAngles.z, 0, 359.5f);
-            carRotation.z -= initialPullStrengthz;
-            transform.eulerAngles = carRotation;
+    //     if(carRotation.z > 0 && carRotation.z < 180){
+    //         carRotation.z = Mathf.Clamp(transform.eulerAngles.z, 0, 359.5f);
+    //         carRotation.z -= initialPullStrengthz;
+    //         transform.eulerAngles = carRotation;
 
-            if(initialPullStrengthz < 50)
-            initialPullStrengthz *= 1.1f;
-        } 
-        else if (carRotation.z > 180 && carRotation.z < 359.5f){
-            carRotation.z = Mathf.Clamp(carRotation.z, 0, 359.5f);
-            carRotation.z += initialPullStrengthz;
-            transform.eulerAngles = carRotation;
+    //         if(initialPullStrengthz < 50)
+    //         initialPullStrengthz *= 1.1f;
+    //     } 
+    //     else if (carRotation.z > 180 && carRotation.z < 359.5f){
+    //         carRotation.z = Mathf.Clamp(carRotation.z, 0, 359.5f);
+    //         carRotation.z += initialPullStrengthz;
+    //         transform.eulerAngles = carRotation;
 
-            if(initialPullStrengthz < 50)
-            initialPullStrengthz *= 1.1f;
-        } 
-        if (carRotation.z >= 395.5f){
-            carRotation.z = Mathf.Clamp(carRotation.z, 0, .5f);
-            carRotation.z = 0;
-            transform.eulerAngles = carRotation;
-            initialPullStrengthz = .1f;
-        } 
-        if (carRotation.z <= .5f){
-            carRotation.z = Mathf.Clamp(carRotation.x, 0, .5f);
-            carRotation.z = 0;
-            transform.eulerAngles = carRotation;
-            initialPullStrengthz = .1f;
-        }
-    }
+    //         if(initialPullStrengthz < 50)
+    //         initialPullStrengthz *= 1.1f;
+    //     } 
+    //     if (carRotation.z >= 395.5f){
+    //         carRotation.z = Mathf.Clamp(carRotation.z, 0, .5f);
+    //         carRotation.z = 0;
+    //         transform.eulerAngles = carRotation;
+    //         initialPullStrengthz = .1f;
+    //     } 
+    //     if (carRotation.z <= .5f){
+    //         carRotation.z = Mathf.Clamp(carRotation.x, 0, .5f);
+    //         carRotation.z = 0;
+    //         transform.eulerAngles = carRotation;
+    //         initialPullStrengthz = .1f;
+    //     }
+    // }
 
     void SmoothTurn(){
         Vector3.Lerp(playerBody.linearVelocity, transform.forward * currentAccel, 1f);
