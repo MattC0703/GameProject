@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b6be75f853be04049862f58a61a9a4de
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 311665
+  packageName: "Easy Water Shader(Ocean \uFF06 Lakes)"
+  packageVersion: 1.0
+  assetPath: Assets/Symphonie/EasyWater/Material/Lake.mat
+  uploadId: 736074

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ef535c5b6ad88414ebd6bb19e732a149
+ShaderIncludeImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 311665
+  packageName: "Easy Water Shader(Ocean \uFF06 Lakes)"
+  packageVersion: 1.0
+  assetPath: Assets/Symphonie/EasyWater/Shader/ocean_wave.cginc
+  uploadId: 736074

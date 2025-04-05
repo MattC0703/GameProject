@@ -1,0 +1,35 @@
+.header {
+    left: auto;
+    align-items: center;
+    align-self: center;
+    font-size: 177px;
+    top: 10%;
+    -unity-font-definition: url("project://database/Assets/Pixel%20Font%20-%20Tripfive/FH-Millennia%20WTT/MILLENNIA.TTF?fileID=12800000&guid=263e9f86c884b8845bb391e81b3f5976&type=3#MILLENNIA");
+    -unity-text-align: upper-center;
+    height: auto;
+    padding-bottom: 0;
+    margin-bottom: 154px;
+}
+
+.buttons {
+    width: 534px;
+    height: 98px;
+    margin-bottom: 40px;
+    align-self: center;
+    -unity-font-definition: url("project://database/Assets/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&guid=585188cdc4600544eb408bee749e4b3a&type=3#ThaleahFat_TTF");
+    font-size: 74px;
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
+    border-bottom-left-radius: 13px;
+    border-top-width: 17px;
+    border-right-width: 17px;
+    border-bottom-width: 17px;
+    border-left-width: 17px;
+    transition-duration: 100ms;
+}
+
+.buttons:hover {
+    transition-duration: 0ms;
+    background-color: rgba(0, 0, 0, 0.2);
+}
