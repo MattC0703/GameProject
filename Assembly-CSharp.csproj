@@ -65,10 +65,13 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.43f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CameraOrbit.cs" />
     <Compile Include="Assets\Scripts\FixCarOrientation.cs" />
+    <Compile Include="Assets\Scripts\DetectGround.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\CinemaOptions.cs" />
     <Compile Include="Assets\Scripts\TurnWheels.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\MainMenuEvents.cs" />
     <Compile Include="Assets\Scripts\Movement.cs" />
     <Compile Include="Assets\Polytope Studio\Lowpoly_Demos\Environment_Free\Helpers\MouseLook.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
@@ -94,6 +97,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\Game Buffs\Free Stylized Textures\README.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
@@ -104,11 +108,11 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\UI Toolkit\Pixel Font - Tripfive\FH-Millennia WTT\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
-    <None Include="Assets\UI Toolkit\MainMenu.uxml" />
+    <None Include="Assets\UI Toolkit\MainMenuAssets\MainMenu.uxml" />
     <None Include="Assets\Polytope Studio\Lowpoly_Environments\Sources\Shaders\PT_Rock_Shader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
-    <None Include="Assets\UI Toolkit\MainMenuStyle.uss" />
+    <None Include="Assets\UI Toolkit\MainMenuAssets\MainMenuStyle.uss" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
@@ -1275,6 +1279,10 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
       <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
       <Private>False</Private>
@@ -1285,10 +1293,6 @@
     </Reference>
     <Reference Include="Unity.Burst.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Burst">

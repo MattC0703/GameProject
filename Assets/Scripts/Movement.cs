@@ -37,6 +37,7 @@ public class Movement : MonoBehaviour
     public float initialPullStrengthz = Mathf.Clamp(.1f, .1f, 100f);
 
     public float turningDampValue = 5f;
+    public float tumbleDampValue = 3f;
 
     public bool isDrifting = false;
 
@@ -66,7 +67,7 @@ public class Movement : MonoBehaviour
 
         ParticleSystem ps = GetComponent<ParticleSystem>();
         var main = ps.main;
-        main.simulationSpace = ParticleSystemSimulationSpace.Local;
+        // main.simulationSpace = ParticleSystemSimulationSpace.Local;
     }
 
     // Update is called once per frame
@@ -115,7 +116,7 @@ public class Movement : MonoBehaviour
             momentumDirection = goStop.Back;
             isAccelerating = true;
             if(currentAccel > 0){
-                accelSpeed = deccelSpeed+200;
+                accelSpeed = deccelSpeed*5f;
                 isAccelerating = false;
             } else if (currentAccel < 0 && currentAccel > maxAccel/2*-1){
                 accelSpeed = originalAccelSpeed;
@@ -139,7 +140,10 @@ public class Movement : MonoBehaviour
         if(!isRotating){
             RotationDeccel();
             
-            playerBody.angularVelocity = Vector3.Lerp(playerBody.angularVelocity, Vector3.zero, turningDampValue * Time.deltaTime); 
+            Vector3 angular = playerBody.angularVelocity;
+            angular.y = Mathf.Lerp(angular.y, 0f, turningDampValue * Time.deltaTime); 
+            playerBody.angularVelocity = angular;
+            playerBody.angularVelocity = Vector3.Lerp(playerBody.angularVelocity, Vector3.zero, tumbleDampValue *  Time.deltaTime);
             //if player isn't turning, naturally straighten car
         }
         if(!isAccelerating && currentAccel > 0){
@@ -313,7 +317,11 @@ public class Movement : MonoBehaviour
             break;
         case goStop.Back:
             currentAccel += deccelSpeed * Time.deltaTime;
+            if(Input.GetButton("Down")){
+                currentAccel = Mathf.Clamp(currentAccel, -50, maxAccel);    
+            } else {
             currentAccel = Mathf.Clamp(currentAccel, -50, 0);
+            }
             break;        
     }
     }
