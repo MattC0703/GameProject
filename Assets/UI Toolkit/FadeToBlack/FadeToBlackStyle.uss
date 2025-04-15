@@ -1,0 +1,9 @@
+VisualElement {
+    position: absolute;
+    transition: opacity 0.5s ease-in-out;
+    background-color: black;
+    opacity:0;
+    height: 100%;
+    width: 100%;
+
+}

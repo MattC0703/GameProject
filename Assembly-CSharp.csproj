@@ -65,15 +65,22 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.43f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\CameraOrbit.cs" />
     <Compile Include="Assets\Scripts\FixCarOrientation.cs" />
     <Compile Include="Assets\Scripts\DetectGround.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Scripts\AirMovement.cs" />
     <Compile Include="Assets\Scripts\CinemaOptions.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\FadeToBlack.cs" />
+    <Compile Include="Assets\Scripts\GameManagement\PlayerCheckpoints.cs" />
+    <Compile Include="Assets\Scripts\GameManagement\CheckpointLogic.cs" />
     <Compile Include="Assets\Scripts\TurnWheels.cs" />
     <Compile Include="Assets\Scripts\UIScripts\MainMenuEvents.cs" />
+    <Compile Include="Assets\Scripts\GameManagement\BoundaryLogic.cs" />
     <Compile Include="Assets\Scripts\Movement.cs" />
     <Compile Include="Assets\Polytope Studio\Lowpoly_Demos\Environment_Free\Helpers\MouseLook.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\PauseMenuEvents.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Polytope Studio\Lowpoly_Demos\Environment_Free\Helpers\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Test.cs" />
@@ -85,11 +92,14 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Polytope Studio\Lowpoly_Environments\Sources\Shaders\PT_Vegetation_Plants_Shader.shader" />
     <None Include="Assets\Fantasy Skybox FREE\Readme.txt" />
+    <None Include="Assets\UI Toolkit\FadeToBlack\FadeToBlack.uxml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\UI Toolkit\PauseMenu\PauseMenu.uxml" />
     <None Include="Assets\Fantasy Skybox FREE\ReleaseNotes.txt" />
     <None Include="Assets\Polytope Studio\Lowpoly_Village\Sources\Shaders\PT_Buildings_Shader_PBR.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\UI Toolkit\FadeToBlack\FadeToBlackStyle.uss" />
     <None Include="Assets\TextMesh Pro\Shaders\SDFFunctions.hlsl" />
     <None Include="Assets\UI Toolkit\Pixel Font - Tripfive\_README.txt" />
     <None Include="Assets\Polytope Studio\Lowpoly_Environments\Sources\Shaders\PT_Vegetation_Opaque_Shader.shader" />
@@ -109,6 +119,7 @@
     <None Include="Assets\UI Toolkit\Pixel Font - Tripfive\FH-Millennia WTT\license.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\UI Toolkit\MainMenuAssets\MainMenu.uxml" />
+    <None Include="Assets\UI Toolkit\PauseMenu\PauseStyle.uss" />
     <None Include="Assets\Polytope Studio\Lowpoly_Environments\Sources\Shaders\PT_Rock_Shader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />

@@ -1,0 +1,29 @@
+VisualElement {
+
+}
+
+.buttons {
+    width: 689px;
+    height: 125px;
+    margin-bottom: 40px;
+    align-self: center;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&guid=585188cdc4600544eb408bee749e4b3a&type=3#ThaleahFat_TTF");
+    font-size: 74px;
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
+    border-bottom-left-radius: 13px;
+    border-top-width: 17px;
+    border-right-width: 17px;
+    border-bottom-width: 17px;
+    border-left-width: 17px;
+    transition-duration: 100ms;
+}
+
+.buttons:hover {
+    scale: 1.1 1.1;
+}
+
+.buttons:active {
+    scale: 1.05 1.05;
+}
